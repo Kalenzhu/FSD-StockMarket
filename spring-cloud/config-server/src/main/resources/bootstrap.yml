@@ -1,0 +1,23 @@
+server: 
+  port: 8901
+        
+spring: 
+  application: 
+    name: config-server
+  cloud: 
+    config: 
+      server: 
+        git: 
+          uri: https://github.com/zuogan/fsd-config.git
+          #search-paths:
+
+eureka-server:
+  host: localhost
+  port: 8001
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka-server.host}:${eureka-server.port}/eureka/

@@ -1,0 +1,9 @@
+<div class="header" *ngIf="loginService.isLoggedIn">
+    <div class="logo">
+        Stock Market Exchange System
+    </div>
+    <div class="logout">
+        Hi, {{loginService.currentUser}} 
+        <span style="color: #780a0a;" (click)="logout()">Logout</span>
+    </div> 
+</div>

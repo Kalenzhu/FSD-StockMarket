@@ -1,0 +1,85 @@
+
+<div class="container">
+
+ <div class="title">Create New Company</div> 
+ <div  class="loginfor">
+                <!--  -->
+   <form class="example-form">
+        <mat-form-field class="example-full-width">
+                <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.companyname" name="companyname" matInput placeholder="Company Name"
+                 [errorStateMatcher]="matcher" value="">              
+        </mat-form-field>
+        
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.ceoname"  name="ceoname"  matInput placeholder="CEO Name">
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.turnover"  name="turnover"   matInput placeholder="Turnover">
+        </mat-form-field>
+        <br>                  
+                  
+        <mat-form-field class="example-full-width">
+          <textarea disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.briefWriteUp"  name="briefWriteUp" matInput placeholder="brief write up"></textarea>
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.boardDirectors"  name="boardDirectors" matInput placeholder="board directors">
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+            <mat-select disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.sector" placeholder="Sector" name="sector">
+                <mat-option *ngFor="let sector of sectors" [value]="sector.id">
+                  {{sector.sectorName}}
+                </mat-option>
+            </mat-select>          
+        </mat-form-field>
+
+        <ng-container *ngIf="mode ==='create'">
+        <br>                  
+        <!--<mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.stockchangename"  name="stockchangename" matInput placeholder="Stock Change Name">
+        </mat-form-field>-->
+        <div class="stockexchange-block">
+        <mat-form-field class="example-full-width">
+          <mat-select disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.stockchangename" placeholder="stock exchange" name="sector">
+              <mat-option *ngFor="let stockexchange of stockexchanges" [value]="stockexchange.id">
+                {{stockexchange.stockExchange}}
+              </mat-option>
+          </mat-select>          
+        </mat-form-field>
+        <button *ngIf="!showSecondStockExchange" class="action-button" disabled="{{userRole=='admin'?false:true}}" (click)="addStockExchange()" mat-flat-button color="primary">Add Stock Exchange</button>
+        </div>
+        <br>  
+
+        <mat-form-field class="example-full-width">
+            <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="companyEntry.code"  name="code" matInput placeholder="Code">
+        </mat-form-field>
+        <br>
+
+        <ng-container *ngIf="showSecondStockExchange">
+        <br>             
+        <div class="stockexchange-block">    
+        <mat-form-field class="example-full-width">
+          <mat-select disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="secondStockchange" placeholder="stock exchange" name="sector">
+              <mat-option *ngFor="let stockexchange of stockexchanges" [value]="stockexchange.id">
+                {{stockexchange.stockExchange}}
+              </mat-option>
+          </mat-select>          
+        </mat-form-field>
+        <button *ngIf="showSecondStockExchange" class="action-button" disabled="{{userRole=='admin'?false:true}}" (click)="removeStockExchange()" mat-flat-button color="primary">Remove Stock Exchange</button>
+        </div> 
+        <br>  
+        <mat-form-field class="example-full-width">
+            <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="secondCompanyCode"  name="code" matInput placeholder="Code">
+        </mat-form-field>
+        <br>
+        </ng-container>
+      </ng-container>
+
+   </form>
+ </div>      
+ <div  class="buttonline"><button disabled="{{userRole=='admin'?false:true}}" (click)="Save()" mat-flat-button color="primary">Save</button> <button  (click)="exit(false)"  mat-stroked-button>Cancel</button></div> 
+
+</div>

@@ -1,0 +1,11 @@
+# eureka address info
+eureka-server:
+  host: localhost
+  port: 8001
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka-server.host}:${eureka-server.port}/eureka/

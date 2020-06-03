@@ -1,0 +1,105 @@
+server:
+  port: 8801
+        
+spring:
+  #profiles:
+    #active: prod
+  application:
+    name: zuul-service
+
+eureka-server:
+  host: localhost
+  port: 8001
+  
+eureka:
+  client:
+    # register to eureka
+    register-with-eureka: true
+    # fetch registry info from eureka
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka-server.host}:${eureka-server.port}/eureka/
+
+zuul:
+  # 所谓敏感，也即是在转发时要删除的设置
+  sensitive-headers: Access-Control-Allow-Origin,Cookie,Set-Cookie # 会过滤客户端附带的headers. It's to fix error: multiple Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,Cookie,Set-Cookie # 会过滤服务之间通信附带的headers, e.g.: 如果客户端在发请求是带了Cookie，那么Cookie依然会传递给下游服务。但是如果下游服务再转发就会被过滤。
+#  prefix: /api/smc
+#  strip-prefix: false
+
+  routes:
+    company:
+      path: /zuul-company/**
+      serviceId: company-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    sector:
+      path: /zuul-sector/**
+      serviceId: sector-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    stock-exchange:
+      path: /zuul-stock-exchange/**
+      serviceId: stock-exchange-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    upload:
+      path: /zuul-upload/**
+      serviceId: upload-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    ipo:
+      path: /zuul-ipo/**
+      serviceId: ipo-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    authentication:
+      path: /zuul-auth/**
+      serviceId: authentication-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true
+      
+    auth2:
+      path: /zuul-auth2/**
+      serviceId: auth-service
+      sensitiveHeaders: 
+      custom-sensitive-headers: true    
+       
+  #PreFilter:
+    #pre:
+      #disable: false
+
+# 设置为true表示开启熔断hystrix，设置false表示关闭熔断机制
+feign:
+  hystrix:
+    enabled: true
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # if hystrix exceed this milliseconds, degrade the service
+            timeoutInMilliseconds: 100000
+
+ribbon:
+  # milliseconds
+  ConnectTimeout: 100000
+  # wait service process time,milliseconds
+  ReadTimeout: 100000
+
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always

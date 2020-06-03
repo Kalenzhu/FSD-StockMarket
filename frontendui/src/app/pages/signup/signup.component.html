@@ -1,0 +1,38 @@
+
+<div class="container">
+
+ <div class="title">Stock Market System Register</div> 
+ <div  class="loginfor">
+                <!--  -->
+   <form class="example-form">
+        <mat-form-field class="example-full-width">
+                <input [(ngModel)]="userName" name="username" matInput placeholder="User Name" [formControl]="usernameFormControl"
+                [errorStateMatcher]="matcher" value="">              
+        </mat-form-field>
+        
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="passCode"  name="password" type="password"  matInput placeholder="password" [formControl]="passwordFormControl"
+          [errorStateMatcher]="matcher" value="">
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="confirmpassCode"  name="confirmpassword" type="password"  matInput placeholder="confirmpassword" 
+          [formControl]="confirmPasswordFormControl"
+          [errorStateMatcher]="matcher" value="">
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="email"  name="email" matInput placeholder="email" [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher" value="">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="mobileNumber"  name="mobileNumber" matInput placeholder="mobile" [formControl]="mobileFormControl"
+          [errorStateMatcher]="matcher" value="">
+        </mat-form-field>
+   </form>
+ </div>      
+ <div  class="buttonline"><button (click)="submit()" mat-flat-button color="primary">Sign Up</button> <button  (click)="cancel()"  mat-stroked-button>Reset</button></div> 
+ <div>{{signupMessage}}</div>
+</div>

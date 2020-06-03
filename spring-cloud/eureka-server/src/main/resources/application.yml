@@ -1,0 +1,26 @@
+# running port
+server:
+  port: 8001
+
+# server name
+spring:
+  application:
+    name: eureka-server
+
+# server host
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    # hide the eureka dashboard warning
+    # enable-self-preservation: false
+  client:
+    # whether fetch registry info from discovery center
+    # since this instance is eureka server, so needn't pull the registry info from server
+    fetch-registry: false
+    # whether list eureka server instance in discovery center
+    # since this instance is eureka server, so needn't register itself
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+

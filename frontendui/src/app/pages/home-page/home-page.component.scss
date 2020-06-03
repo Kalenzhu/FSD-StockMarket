@@ -1,0 +1,21 @@
+$topnav-background-color: #3d70b2;
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+
+::ng-deep .mat-tab-label{
+  color: rgba(43, 55, 227, 0.87);
+  background-color: #f0f4ee;
+  &:hover {
+    background-color: #9997e7;
+  }
+  // :active {
+  //   color: red;
+  // }
+}

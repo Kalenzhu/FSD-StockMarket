@@ -1,0 +1,30 @@
+
+<div class="container">
+
+ <div class="title">Stock Market Exchange System</div> 
+ <div class="title" style="font-size: 14px; margin-top: 10px;">For test: Admin Role(admin/123456), User Role(zuogan/123456)</div> 
+ <div  class="loginfor">
+                <!--  -->
+   <form class="example-form">
+        <mat-form-field class="example-full-width">
+                <input [(ngModel)]="userName" name="username" matInput placeholder="User Name" [formControl]="emailFormControl"
+                [errorStateMatcher]="matcher" value="">
+            
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  User Name is <strong>required</strong>
+                </mat-error>
+        </mat-form-field>
+        
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="passCode"  name="password" type="password"  matInput placeholder="password code">
+        </mat-form-field>
+
+        <mat-error *ngIf="isValid==false">
+          User Name or password is <strong>Not Valid</strong>
+        </mat-error>
+   </form>
+ </div>      
+ <div  class="buttonline"><button (click)="submit()" mat-flat-button color="primary">Login</button> <button  (click)="signup()"  mat-stroked-button>Sign Up</button></div> 
+ <div>{{pageMessage}}</div>
+</div>
