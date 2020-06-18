@@ -1,0 +1,6 @@
+FROM java:latest
+VOLUME /tmp
+ARG JAR_FILE
+ADD ${JAR_FILE} app.jar
+EXPOSE 8204
+ENTRYPOINT ["java","-jar","/app.jar"]

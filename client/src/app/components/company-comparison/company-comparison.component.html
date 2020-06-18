@@ -1,0 +1,132 @@
+<div class="container">
+
+    <div class="title">Company Comparison</div> 
+    <div *ngIf="!showChart" class="loginfor">
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="companyComparison.companyOrSector" 
+                    placeholder="Select Company/Sector" name="companyOrSector">
+                    <mat-option *ngFor="let item of companyOrSector" [value]="item">
+                      {{item}}
+                    </mat-option>
+                </mat-select>          
+            </mat-form-field>
+            <br>
+
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="companyComparison.stockchange" placeholder="Select Stock Exchange" 
+                    (selectionChange)="stockExchangeSelectChanged1()"
+                    name="stockchange">
+                    <mat-option *ngFor="let stockexchange of stockexchanges" [value]="stockexchange.id">
+                      {{stockexchange.stockExchange}}
+                    </mat-option>
+                </mat-select>          
+            </mat-form-field>
+            <br>
+
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="companyComparison.company" placeholder="Select Company" 
+                    name="company">
+                    <!--<mat-option *ngFor="let company of companies" [value]="company.id">-->
+                    <mat-option *ngFor="let company of companies" [value]="company">
+                        {{company.companyName}}
+                    </mat-option>
+                </mat-select>          
+            </mat-form-field>
+                <!--<mat-form-field class="example-full-width">
+                    <input type="text"
+                       [(ngModel)]="companyComparison.companyName"
+                       placeholder="Select Company"
+                       aria-label="Company"
+                       name="companyName"
+                       matInput
+                       [matAutocomplete]="auto1">
+                <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+                  <mat-option *ngFor="let company of autoCompleteFilter1()" [value]="company.companyName">
+                    {{company.companyName}}
+                  </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>-->
+            <br>       
+
+            <mat-form-field class="example-full-width" style="margin-right: 30px; min-width: 200px;">
+                <input name="fromDate" [(ngModel)]="companyComparison.fromDate" matInput 
+                    [matDatepicker]="picker1" placeholder="From Period">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>         
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" style="min-width: 200px;">
+                <input name="endDate" [(ngModel)]="companyComparison.endDate" matInput 
+                    [matDatepicker]="picker2" placeholder="To Period">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>         
+            </mat-form-field>
+            <br> 
+
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="companyComparison.peroidicity" 
+                    placeholder="Specify Peroidicity" name="peroidicity">
+                    <mat-option *ngFor="let item of peroidicity" [value]="item">
+                      {{item}}
+                    </mat-option>
+                </mat-select>          
+            </mat-form-field>
+            <br>
+
+            <button (click)="addOrRemoveSecondCompany()" mat-flat-button color="primary">
+                {{showSecondCompany ? 'Remove Company' : 'Add Company'}}
+            </button> 
+            <br>
+
+            <div *ngIf="showSecondCompany">
+                <mat-form-field class="example-full-width">
+                    <mat-select [(ngModel)]="secondCompanyStockchange" placeholder="Select Stock Exchange" 
+                        (selectionChange)="stockExchangeSelectChanged2()"
+                        name="secondCompanyStockchange">
+                        <mat-option *ngFor="let stockexchange of stockexchanges2" [value]="stockexchange.id">
+                          {{stockexchange.stockExchange}}
+                        </mat-option>
+                    </mat-select>          
+                </mat-form-field>
+                <br>
+ 
+                <mat-form-field class="example-full-width">
+                    <mat-select [(ngModel)]="secondCompany" placeholder="Select Company" 
+                        name="secondCompany">
+                        <!--<mat-option *ngFor="let company of companies2" [value]="company.id">-->
+                        <mat-option *ngFor="let company of companies2" [value]="company">
+                            {{company.companyName}}
+                        </mat-option>
+                    </mat-select>          
+                </mat-form-field>
+                    <!--
+                        <mat-form-field class="example-full-width">
+                        <input type="text"
+                           [(ngModel)]="secondCompany" 
+                           placeholder="Select Company"
+                           aria-label="Company"
+                           name="secondCompany"
+                           matInput
+                           [matAutocomplete]="auto2">
+                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                      <mat-option *ngFor="let company of autoCompleteFilter2()" [value]="company.id">
+                        {{company.companyName}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    </mat-form-field>-->
+                <br>    
+
+            </div>
+
+            <div class="buttonline">
+                <button (click)="generateMap()" 
+                    mat-flat-button color="primary">Generate Map</button> 
+            </div> 
+        </form>
+    </div> 
+    <div *ngIf="showChart" >
+        <div echarts [options]="barChartOption"></div>
+        <button (click)="showChart=!showChart" mat-stroked-button>Back</button>
+    </div> 
+</div>  

@@ -1,0 +1,66 @@
+
+<div class="container">
+
+ <div class="title">Import Excel Data</div> 
+ <div  class="loginfor">
+    <input [(ngModel)]="filename" type="file" 
+      name="filename" accept=".xlsx" 
+      placeholder="Select file" #fileinput value="">         
+ </div>
+ <div class="download-link">Click here to download sample excel file</div>      
+ <div  class="buttonline">
+   <button (click)="submit()" mat-flat-button color="primary">Upload</button> 
+ </div> 
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Summary of Upload</h4>
+  </div>
+  <mat-dialog-content class="mat-typography">
+  <div class="modal-body">
+    <div class="summary-line">
+      <label for="companyname" class="col-sm-3 col-form-label">Company Name : </label>
+      <span class="summary-line-content">{{summary.companyname}}</span>
+      <!--<div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="companyname" [value]="summary.companyname">
+      </div>-->
+    </div>
+    <div class="summary-line">
+      <label for="stockexchange" class="col-sm-3 col-form-label">Stock Exchange : </label>
+      <span class="summary-line-content">{{summary.stockexchange}}</span>
+      <!--<div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="stockexchange" [value]="summary.stockexchange">
+      </div>-->
+    </div>
+    <div class="summary-line">
+      <label for="numofimported" class="col-sm-3 col-form-label">Num of Record Imported : </label>
+      <span class="summary-line-content">{{summary.numofimport}}</span>
+      <!--<div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="numofimported" [value]="summary.numofimport">
+      </div>-->
+    </div>
+    <div class="summary-line">
+      <label for="fromdate" class="col-sm-3 col-form-label">From Date : </label>
+      <span class="summary-line-content">{{summary.fromdate}}</span>
+      <!--<div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="fromdate" [value]="summary.fromdate">
+      </div>-->
+    </div>
+    <div class="summary-line">
+      <label for="todate" class="col-sm-3 col-form-label">To Date : </label>
+      <span class="summary-line-content">{{summary.todate}}</span>
+      <!--<div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext" id="todate" [value]="summary.todate">
+      </div>-->
+    </div>
+  </div>
+  </mat-dialog-content>
+  <!--<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel click');">Close</button>
+  </div>-->
+  <!--<mat-dialog-actions align="end">-->
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+  </mat-dialog-actions>
+</ng-template>

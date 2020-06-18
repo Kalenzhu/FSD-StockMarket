@@ -1,0 +1,107 @@
+version: '3'
+services:
+
+  eureka:
+    image: fsd/eureka-server
+    container_name: eureka
+    ports:
+    - 8001:8001
+    restart: always
+
+  config:
+    image: fsd/config-server
+    container_name: config
+    ports:
+    - 8901:8901
+    restart: always     
+
+  zuul:
+    image: fsd/zuul-service
+    restart: always
+    container_name: zuul
+    ports:
+    - 8801:8801
+    depends_on:
+      - eureka
+               
+  mysql-docker:
+    image: mysql:latest
+    command: --init-file /data/mysql/dbv2.sql
+    volumes:
+      - C://eclipse-workspace//fsd//stock-market-docker//mysql//data:/var/lib/mysql
+      - C://eclipse-workspace//fsd//stock-market-docker//mysql//sql//dbv2.sql:/data/mysql/dbv2.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: fsd
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+    container_name: mysql-docker
+    ports:
+      - "3306:3306"
+      
+  company:
+    image: fsd/company-service
+    restart: always
+    container_name: company
+    ports:
+    - 8202:8202
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker
+      
+  auth:
+    image: fsd/auth-service
+    restart: always
+    container_name: auth
+    ports:
+    - 8201:8201
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker
+ 
+  sector:
+    image: fsd/sector-service
+    restart: always
+    container_name: sector
+    ports:
+    - 8203:8203
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker
+
+  stock-exchange:
+    image: fsd/stock-exchange-service
+    restart: always
+    container_name: stock-exchange
+    ports:
+    - 8204:8204
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker
+ 
+  upload:
+    image: fsd/upload-service
+    restart: always
+    container_name: upload
+    ports:
+    - 8205:8205
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker
+                    
+  ipo:
+    image: fsd/ipo-service
+    restart: always
+    container_name: ipo
+    ports:
+    - 8206:8206
+    depends_on:
+      - eureka
+      - config
+      - mysql-docker

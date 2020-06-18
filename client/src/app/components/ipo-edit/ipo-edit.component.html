@@ -1,0 +1,55 @@
+
+<div class="container">
+
+ <div class="title">IPO Details</div> 
+ <div  class="loginfor">
+                  
+   <form class="example-form">
+        <!--<mat-form-field class="example-full-width">
+                <input disabled="{{userRole=='admin' && mode ==='create' ?false:true}}" [(ngModel)]="ipoData.companyname" name="companyname" matInput placeholder="Company Name"
+                 [errorStateMatcher]="matcher" value="">              
+        </mat-form-field>-->
+        <mat-form-field class="example-full-width">
+          <mat-select disabled="{{userRole=='admin'  && mode ==='create' ?false:true}}" [(ngModel)]="ipoData.companyname" name="companyname" placeholder="Company Name">
+              <mat-option *ngFor="let entry of companies" [value]="entry.id">
+                {{entry.companyName}}
+              </mat-option>
+          </mat-select>          
+        </mat-form-field>
+
+        <br>                  
+        <mat-form-field class="example-full-width">
+            <mat-select disabled="{{userRole=='admin'  && mode ==='create' ?false:true}}" [(ngModel)]="ipoData.stockchange" 
+              name="stockchange" placeholder="stock exchange" (selectionChange)="stockExchangeSelectChanged()">
+                <mat-option *ngFor="let entry of stockexchanges" [value]="entry.id">
+                  {{entry.stockExchange}}
+                </mat-option>
+            </mat-select>          
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="ipoData.price"  name="price"  matInput placeholder="Price Per Share">
+        </mat-form-field>
+        <br>                  
+        <mat-form-field class="example-full-width">
+          <input disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="ipoData.numberofshare"  name="numberofshare"   matInput placeholder="Number Of Shares">
+        </mat-form-field>
+        <br>    
+        
+        <mat-form-field class="example-full-width">
+
+            <input name="opendatetime"  disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="ipoData.opendatetime" matInput [matDatepicker]="picker" placeholder="open date time">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>         
+        </mat-form-field>
+          <br> 
+                  
+        <mat-form-field class="example-full-width">
+          <textarea disabled="{{userRole=='admin'?false:true}}" [(ngModel)]="ipoData.remarks"  name="remarks" matInput placeholder="remarks"></textarea>
+        </mat-form-field>
+        <br>                  
+   </form>
+ </div>      
+ <div  class="buttonline"><button disabled="{{userRole=='admin'?false:true}}" (click)="Save()" mat-flat-button color="primary">Save</button> <button  (click)="exit(false)"  mat-stroked-button>Cancel</button></div> 
+
+</div>

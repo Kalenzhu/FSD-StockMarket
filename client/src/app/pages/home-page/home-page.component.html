@@ -1,0 +1,21 @@
+<div>
+  <home-header></home-header>
+</div>
+<mat-tab-group>
+  <mat-tab  *ngIf="loginService.role=='admin'" label="Import Data">
+      <price-file-import></price-file-import> 
+  </mat-tab>
+  <mat-tab label="IPO Details">
+      <ipo-table></ipo-table>
+  </mat-tab>
+  <mat-tab label="Company Detail"> 
+      <company-table></company-table>
+  </mat-tab>
+  <mat-tab label="Company Comparison">
+      <company-comparison></company-comparison>
+  </mat-tab>
+  <mat-tab label="Update profile">
+      <profile-update></profile-update>
+  </mat-tab>
+</mat-tab-group>
+             

@@ -1,0 +1,63 @@
+server:
+  port: 8201
+        
+# config address info
+config-server:
+  host: localhost
+  port: 8901
+
+spring:
+  application:
+    name: auth-service
+  cloud:
+    config:
+      uri: http://${config-server.host}:${config-server.port}
+      # enviroment, such as test, dev, uat or production
+      profile: dev
+      # if you want to refer many config files, list their names at here
+      name: common
+  datasource:
+    #url: ${data-source.url}
+    url: jdbc:mysql://localhost:3306/fsd?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    #username: ${data-source.username}
+    username: root
+    #password: ${data-source.password}
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 8
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: select 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      use-global-data-source-stat: true
+  jpa:
+    show-sql: true
+  mail: 
+    # maillink: http://localhost:8860/securityuser/api/smc/users/confirmed/
+    maillink: http://localhost:8801/zuul-auth2/confirmed/
+    loginlink: http://localhost:4200
+    host: smtp.aliyun.com
+    port: 465 # mailSenderServer：smtp.qq.com，use SSL，prot 465 or 587
+    username: test@aliyun.com
+    password: 111111  
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true # enable auth verification
+          socketFactory.class: javax.net.ssl.SSLSocketFactory # Socket factory for SSL
+          starttls:
+            enable: true # Encrypted communication
+            required: true # Require encrypted communication

@@ -1,0 +1,24 @@
+# eureka address info
+eureka-server:
+  host: localhost
+  #host: eureka
+  port: 8001
+
+#oauth-server:
+#  host: localhost
+#  port: 8201
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka-server.host}:${eureka-server.port}/eureka/
+ 
+#feign.hystirx.enable: true
+#security:
+#  oauth2:
+#    resource:
+#      id: company-service
+#      user-info-uri: http://${oauth-server.host}:${oauth-server.port}/user/current
+#      prefer-token-info: false
